@@ -149,6 +149,12 @@ class GameScene
         itemsArr[5].point = 7;
         itemsArr[5].reqGold = 3000;
         itemsArr[5].isWeapon = true;
+
+        itemsArr[6].name = "개쩌는 엑스칼리버";
+        itemsArr[6].comment = "끝판왕.";
+        itemsArr[6].point = 999;
+        itemsArr[6].reqGold = 9999;
+        itemsArr[6].isWeapon = true;
     }
 
     public void GameInit()
@@ -167,7 +173,8 @@ class GameScene
         Console.Write("스파르타 마을에 오신 여러분 환영합니다.\n이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.\n\n");
         Console.WriteLine("1. 상태 보기");
         Console.WriteLine("2. 인벤토리");
-        Console.WriteLine("3. 상점\n");
+        Console.WriteLine("3. 상점");
+        Console.WriteLine("4. 던전입장\n");
 
         int choice = player.InputAction();
         switch (choice)
@@ -175,6 +182,7 @@ class GameScene
             case 1: ViewStatus(); break;
             case 2: ViewInventory(); break;
             case 3: ViewShop(); break;
+            case 4: ViewDungeon(); break;
             default: 
                 Console.WriteLine("잘못된 입력입니다."); 
                 Console.ReadLine(); // 사용자 입력까지 대기
@@ -430,6 +438,11 @@ class GameScene
         }
     }
 
+
+    void ViewDungeon()
+    {
+
+    }
 }
 
 
