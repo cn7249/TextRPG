@@ -1,5 +1,6 @@
 ﻿// 프로그래밍 기초 개인 과제 - 텍스트 RPG 게임 만들기
 
+using System;
 using System.Diagnostics.Contracts;
 
 public class Player
@@ -32,10 +33,23 @@ public class Player
     // 플레이어의 행동
     public int InputAction()
     {
-        // 입력 받는 부분
-        Console.Write("원하시는 행동을 입력해주세요.\n>>");
-        string input = Console.ReadLine();
-        int num = int.Parse(input); // 숫자 이외 입력 시 에러 안나게 버그 수정할 것
+        int num = 0;
+        while (true)
+        {
+            Console.Write("원하시는 행동을 입력해주세요.\n>>");
+            string input = Console.ReadLine();
+            bool isInt;
+            isInt = int.TryParse(input, out num);
+
+            if (isInt)
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("잘못된 값입니다. 화면에 표시된 정수를 입력해주세요.");
+            }
+        }
         return num;
     }
 
