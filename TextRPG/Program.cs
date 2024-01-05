@@ -13,6 +13,9 @@ public class Player
     public int hp = 100;
     public int gold = 1500;
 
+    public int initAtk = 10;
+    public int initDef = 5;
+
     // 플레이어의 인벤토리
     public bool[] inventory = new bool[10];
 
@@ -170,14 +173,26 @@ class GameScene
     {
         Console.Clear();
 
-        string equipAtk = "";
-        string equipDef = "";
+        int equipAtk = player.atk - player.initAtk;
+        int equipDef = player.def - player.initDef;
+        string addAtk = "";
+        string addDef = "";
+
+        if (equipAtk != 0)
+        {
+            addAtk = " (+" + equipAtk + ")";
+        }
+
+        if (equipDef != 0)
+        {
+            addDef = " (+" + equipDef + ")";
+        }
 
         Console.Write("상태 보기\n캐릭터의 정보가 표시됩니다.\n\n");
         Console.WriteLine("Lv. " + player.level);
         Console.WriteLine("{0} ( {1} )", player.name, player.job);
-        Console.WriteLine("공격력 : " + player.atk);
-        Console.WriteLine("방어력 : " + player.def);
+        Console.WriteLine("공격력 : " + player.atk + addAtk);
+        Console.WriteLine("방어력 : " + player.def + addDef);
         Console.WriteLine("체 력 : " + player.hp);
         Console.WriteLine("Gold : {0} G\n", player.gold);
         Console.WriteLine("0. 나가기\n");
@@ -272,17 +287,20 @@ class GameScene
         {
             int select = choice - 1;
 
-            if (itemsArr[select].isEquiped)
+            if (itemsArr[select].isBought == true)
             {
-                itemsArr[select].isEquiped = false;
-                player.OffEquipment(itemsArr[select].point, itemsArr[select].isWeapon);
-                Console.WriteLine("{0}을(를) 장착 해제했습니다.", itemsArr[select].name);
-            }
-            else if (itemsArr[select].isEquiped == false)
-            {
-                itemsArr[select].isEquiped= true;
-                player.OnEquipment(itemsArr[select].point, itemsArr[select].isWeapon);
-                Console.WriteLine("{0}을(를) 장착 완료했습니다.", itemsArr[select].name);
+                if (itemsArr[select].isEquiped)
+                {
+                    itemsArr[select].isEquiped = false;
+                    player.OffEquipment(itemsArr[select].point, itemsArr[select].isWeapon);
+                    Console.WriteLine("{0}을(를) 장착 해제했습니다.", itemsArr[select].name);
+                }
+                else
+                {
+                    itemsArr[select].isEquiped = true;
+                    player.OnEquipment(itemsArr[select].point, itemsArr[select].isWeapon);
+                    Console.WriteLine("{0}을(를) 장착 완료했습니다.", itemsArr[select].name);
+                }
             }
             else
             {
